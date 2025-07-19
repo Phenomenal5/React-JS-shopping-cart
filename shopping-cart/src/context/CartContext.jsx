@@ -17,12 +17,27 @@ const addToCart = (product) => {
     setCart(cart.map(item => item.id === product.id ? {...item, quantity: item.quantity + 1} : item))
   }
 }
+
+
+const increaseQuantity = (productId) => {
+  setCart(cart.map(item => item.id === productId ? {...item, quantity: item.quantity + 1} : item));
+}
+
+const decreaseDuantity = (productId) => {
+  setCart(cart.map(item => (item.id === productId && item.quantity > 1) ? {...item, quantity: item.quantity - 1} : item));
+}
+
+const removeFromCart = (productId) => {
+  setCart(cart.filter(item => item.id !== productId ))
+}
+
+
 console.log(cart);
 
 
 
   return (
-    <CartContext.Provider value={{addToCart, cart}}>
+    <CartContext.Provider value={{addToCart, cart, removeFromCart, increaseQuantity, decreaseDuantity}}>
       {children}
     </CartContext.Provider>
   )
